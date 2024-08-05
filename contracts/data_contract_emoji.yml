@@ -1,0 +1,95 @@
+# Contrato de datos
+creador_contrato: "Fabio Salinas"
+fecha_creacion: "2024-08-05"
+fecha_ultima_modificacion: "2024-08-05"
+archivo_de_revision_de_datos: "check_emoji.yml"
+responsable_de_revision_de_datos: "Fabio Salinas"
+responsable_de_entrega_de_datos: "Carlos González"
+email_responsable_de_entrega_de_datos: "carlos.gonzalez@transunion.com"
+frecuencia_de_entrega_de_datos: "diaria"
+hora_de_entrega_de_datos: "08:00"
+
+# Variables adicionales
+tipo_de_datos: "transaccionales" # Ejemplo: transaccionales, demográficos, etc.
+fuente_de_datos: "Compra de Datos"
+proveedor: "Transunion"
+solicitante_de_datos: "Equipo de Análisis"
+centro_de_costos: "CC-12345"
+formato_de_datos: "CSV" # Ejemplo: CSV, JSON, Parquet, etc.
+excel_nombre_de_archivo: "datos_transaccionales.xlsx"
+excel_hoja_de_trabajo: "Sheet1"
+volumen_estimado_de_datos: "100MB por entrega"
+metodo_de_entrega: "SFTP" # Ejemplo: SFTP, API, Email, etc.
+frecuencia_de_revision_de_calidad: "en cada entrega"
+criterios_de_validacion: 
+  - "Formato correcto"
+  - "No duplicados"
+  - "Valores nulos permitidos: 5% máximo"
+  - "Consistencia en los valores"
+protocolo_de_notificacion_de_errores:
+  - "Email al responsable de entrega de datos"
+  - "Mensaje en Teams"
+email_para_notificacion_de_errores: "soporte.datos@transunion.com"
+umbral_de_alerta_de_errores: "10%"
+acciones_de_contingencia:
+  - "Reintento de entrega en 1 hora"
+  - "Notificación al equipo de TI"
+proceso_de_actualizacion_de_metadatos: "en cada entrega"
+responsable_de_actualizacion_de_metadatos: "Jonathan Tautiva"
+email_responsable_de_actualizacion_de_metadatos: "jonathan.tautiva@libertycolombia.com"
+retencion_de_datos: "1 año"
+cumplimiento_de_regulaciones: 
+  - "GDPR"
+  - "CCPA"
+comentarios_adicionales: "Revisión del contrato cada 6 meses"
+
+# Variables enfocadas en el proceso
+descripcion_del_proceso: "Proceso de entrega y revisión de datos transaccionales diarios"
+objetivo_del_proceso: "Asegurar la integridad y calidad de los datos entregados"
+etapas_del_proceso: 
+  - nombre: "Recepción de datos"
+    descripcion: "Recepción de los datos desde la fuente"
+    responsable: "Carlos González"
+    email_responsable: "carlos.gonzalez@libertycolombia.com"
+  - nombre: "Validación inicial"
+    descripcion: "Validación de formato y campos obligatorios"
+    responsable: "Equipo de Datos"
+  - nombre: "Carga en sistema de análisis"
+    descripcion: "Carga de datos en el sistema de análisis para su procesamiento"
+    responsable: "Equipo de TI"
+  - nombre: "Revisión de calidad"
+    descripcion: "Revisión de calidad según criterios establecidos"
+    responsable: "Fabio Salinas"
+  - nombre: "Reporte de calidad"
+    descripcion: "Generación de reporte de calidad de datos"
+    responsable: "Equipo de Calidad"
+herramientas_utilizadas: 
+  - "Pentaho"
+  - "Apache Nifi"
+  - "Datadog"
+  - "Jira"
+frecuencia_de_reporte_de_estado: "Diaria"
+destinatarios_de_reporte_de_estado: 
+  - "fabio.salinas@transunion.com"
+  - "carlos.gonzalez@transunion.com"
+criterios_de_exito: 
+  - "Entrega puntual"
+  - "Validación completa sin errores críticos"
+  - "Datos cargados correctamente en el sistema de análisis"
+riesgos_identificados: 
+  - "Retraso en la entrega de datos"
+  - "Errores en la validación inicial"
+  - "Fallas en la carga de datos"
+plan_de_mitigacion_de_riesgos: 
+  - "Notificación temprana de retrasos"
+  - "Procedimientos de validación alternativos"
+  - "Plan de contingencia para carga de datos"
+proceso_de_mejora_continua: 
+  - "Revisión mensual de KPIs del proceso"
+  - "Retroalimentación del equipo"
+  - "Implementación de mejoras sugeridas"
+indicadores_clave_de_rendimiento (KPIs): 
+  - "Porcentaje de entregas puntuales"
+  - "Porcentaje de datos validados correctamente"
+  - "Tiempo promedio de carga de datos"
+politica_de_seguimiento_de_incidencias: "Uso de Jira para registrar y seguir todas las incidencias"

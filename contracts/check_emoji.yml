@@ -1,0 +1,18 @@
+checks for emoji:
+    - row_count > 0
+    - invalid_count("User Age") = 0:
+        valid min: 26
+        valid max: 52
+    - avg("User Age") > 37
+    - duplicate_count(Emoji) = 0
+    - schema: # Checks for schema changes
+        name: Find forbidden, missing, or wrong type
+        warn:
+            when required column missing: [Emoji, "User Gender"]
+            when forbidden column present: [credit_card]
+            when wrong column type:
+                Platform: varchar
+        fail:
+            when forbidden column present: [pii*]
+            when wrong column index:
+                "User Age": 1
