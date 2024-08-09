@@ -1,13 +1,19 @@
 {
     "definitionName": "test",
     "defaultDataSource": "dask",
-    "dataTimestamp": "2024-08-01T21:12:41+00:00",
-    "scanStartTimestamp": "2024-08-01T21:12:41+00:00",
-    "scanEndTimestamp": "2024-08-01T21:12:41+00:00",
+    "dataTimestamp": "2024-08-09T00:01:00+00:00",
+    "scanStartTimestamp": "2024-08-09T00:01:00+00:00",
+    "scanEndTimestamp": "2024-08-09T00:01:01+00:00",
     "hasErrors": true,
     "hasWarnings": false,
     "hasFailures": true,
     "metrics": [
+        {
+            "identity": "metric-test-dask-emoji-Emoji-duplicate_count",
+            "metricName": "duplicate_count",
+            "value": null,
+            "dataSourceName": "dask"
+        },
         {
             "identity": "metric-test-dask-emoji-\"User Age\"-invalid_count-43532e3b",
             "metricName": "invalid_count",
@@ -24,12 +30,6 @@
             "identity": "metric-test-dask-emoji-\"User Age\"-avg",
             "metricName": "avg",
             "value": 38.8756,
-            "dataSourceName": "dask"
-        },
-        {
-            "identity": "metric-test-dask-emoji-Emoji-duplicate_count",
-            "metricName": "duplicate_count",
-            "value": null,
             "dataSourceName": "dask"
         },
         {
@@ -225,8 +225,8 @@
                                 "fileId": ""
                             }
                         },
-                        "failingRowsQueryName": "20.dask.emoji.\"User Age\".failed_rows[invalid_count].failing_sql",
-                        "passingRowsQueryName": "20.dask.emoji.\"User Age\".failed_rows[invalid_count].passing_sql",
+                        "failingRowsQueryName": "4.dask.emoji.\"User Age\".failed_rows[invalid_count].failing_sql",
+                        "passingRowsQueryName": "4.dask.emoji.\"User Age\".failed_rows[invalid_count].passing_sql",
                         "totalFailingRows": 2479,
                         "sampleRowCount": 100
                     }
@@ -270,27 +270,27 @@
     ],
     "queries": [
         {
-            "name": "17.dask.emoji.aggregation[0]",
+            "name": "1.dask.emoji.aggregation[0]",
             "dataSource": "dask",
             "table": "emoji",
             "partition": null,
             "column": null,
             "sql": "SELECT \n  COUNT(*),\n  COUNT(CASE WHEN NOT (\"User Age\" IS NULL) AND NOT (\"User Age\" >= 26.0 AND \"User Age\" <= 52.0) THEN 1 END),\n  AVG(\"User Age\") \nFROM emoji",
             "exception": null,
-            "duration": "0:00:00.056177"
+            "duration": "0:00:00.049553"
         },
         {
-            "name": "20.dask.emoji.\"User Age\".failed_rows[invalid_count]",
+            "name": "4.dask.emoji.\"User Age\".failed_rows[invalid_count]",
             "dataSource": "dask",
             "table": "emoji",
             "partition": null,
             "column": "\"User Age\"",
             "sql": "SELECT * FROM emoji \n WHERE NOT (\"User Age\" IS NULL) AND NOT (\"User Age\" >= 26.0 AND \"User Age\" <= 52.0) \n LIMIT 100",
             "exception": null,
-            "duration": "0:00:00.043948"
+            "duration": "0:00:00.041737"
         },
         {
-            "name": "20.dask.emoji.\"User Age\".failed_rows[invalid_count].failing_sql",
+            "name": "4.dask.emoji.\"User Age\".failed_rows[invalid_count].failing_sql",
             "dataSource": "dask",
             "table": "emoji",
             "partition": null,
@@ -300,7 +300,7 @@
             "duration": null
         },
         {
-            "name": "20.dask.emoji.\"User Age\".failed_rows[invalid_count].passing_sql",
+            "name": "4.dask.emoji.\"User Age\".failed_rows[invalid_count].passing_sql",
             "dataSource": "dask",
             "table": "emoji",
             "partition": null,
@@ -310,17 +310,17 @@
             "duration": null
         },
         {
-            "name": "19.dask.emoji.Emoji.duplicate_count",
+            "name": "3.dask.emoji.Emoji.duplicate_count",
             "dataSource": "dask",
             "table": "emoji",
             "partition": null,
             "column": "Emoji",
             "sql": "\nWITH frequencies AS (\n    SELECT COUNT(*) AS frequency\n    FROM emoji\n    WHERE Emoji IS NOT NULL\n    GROUP BY Emoji)\nSELECT COUNT(*)\nFROM frequencies\nWHERE frequency > 1",
-            "exception": "Traceback (most recent call last):\n  File \"/home/ubuntu/proyectos/poc_soda_files/soda_files/lib/python3.10/site-packages/soda/execution/query/query.py\", line 135, in _execute_cursor\n    cursor.execute(self.sql)\n  File \"/home/ubuntu/proyectos/poc_soda_files/soda_files/lib/python3.10/site-packages/soda/data_sources/dask_cursor.py\", line 20, in execute\n    self.df: DataFrame = self.context.sql(sql).compute().replace({np.nan: None})\n  File \"/home/ubuntu/proyectos/poc_soda_files/soda_files/lib/python3.10/site-packages/dask_sql/context.py\", line 509, in sql\n    rel, _ = self._get_ral(sql)\n  File \"/home/ubuntu/proyectos/poc_soda_files/soda_files/lib/python3.10/site-packages/dask_sql/context.py\", line 827, in _get_ral\n    raise ParsingException(sql, str(pe)) from None\ndask_sql.utils.ParsingException: SchemaError(FieldNotFound { field: Column { relation: None, name: \"emoji\" }, valid_fields: [Column { relation: Some(Bare { table: \"emoji\" }), name: \"Emoji\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Context\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Platform\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Age\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Gender\" }] })\n",
-            "duration": "0:00:00.004389"
+            "exception": "Traceback (most recent call last):\n  File \"/mnt/N1662770/poc_soda_files/soda_files/lib/python3.8/site-packages/soda/execution/query/query.py\", line 135, in _execute_cursor\n    cursor.execute(self.sql)\n  File \"/mnt/N1662770/poc_soda_files/soda_files/lib/python3.8/site-packages/soda/data_sources/dask_cursor.py\", line 20, in execute\n    self.df: DataFrame = self.context.sql(sql).compute().replace({np.nan: None})\n  File \"/mnt/N1662770/poc_soda_files/soda_files/lib/python3.8/site-packages/dask_sql/context.py\", line 509, in sql\n    rel, _ = self._get_ral(sql)\n  File \"/mnt/N1662770/poc_soda_files/soda_files/lib/python3.8/site-packages/dask_sql/context.py\", line 827, in _get_ral\n    raise ParsingException(sql, str(pe)) from None\ndask_sql.utils.ParsingException: SchemaError(FieldNotFound { field: Column { relation: None, name: \"emoji\" }, valid_fields: [Column { relation: Some(Bare { table: \"emoji\" }), name: \"Emoji\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Context\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Platform\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Age\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Gender\" }] })\n",
+            "duration": "0:00:00.003847"
         },
         {
-            "name": "19.dask.emoji.Emoji.duplicate_count.failing_sql",
+            "name": "3.dask.emoji.Emoji.duplicate_count.failing_sql",
             "dataSource": "dask",
             "table": "emoji",
             "partition": null,
@@ -330,7 +330,7 @@
             "duration": null
         },
         {
-            "name": "19.dask.emoji.Emoji.duplicate_count.passing_sql",
+            "name": "3.dask.emoji.Emoji.duplicate_count.passing_sql",
             "dataSource": "dask",
             "table": "emoji",
             "partition": null,
@@ -340,14 +340,14 @@
             "duration": null
         },
         {
-            "name": "18.dask.emoji.schema[emoji]",
+            "name": "2.dask.emoji.schema[emoji]",
             "dataSource": "dask",
             "table": "emoji",
             "partition": null,
             "column": null,
             "sql": "select column, type from showcolumns",
             "exception": null,
-            "duration": "0:00:00.006232"
+            "duration": "0:00:00.005664"
         }
     ],
     "automatedMonitoringChecks": [],
@@ -357,352 +357,352 @@
         {
             "level": "INFO",
             "message": "Soda Core 3.3.13",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 282,
+            "timestamp": "2024-08-09T00:01:00+00:00",
+            "index": 1,
             "doc": null,
             "location": null
         },
         {
             "level": "WARNING",
             "message": "Deprecated: implicit data_source_name is no longer supported. Make sure to provide a data_source_name when invoking 'add_dask_dataframe()'.",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 283,
+            "timestamp": "2024-08-09T00:01:00+00:00",
+            "index": 2,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
             "message": "Scan execution starts",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 284,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 3,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "Query 17.dask.emoji.aggregation[0]:\nSELECT \n  COUNT(*),\n  COUNT(CASE WHEN NOT (\"User Age\" IS NULL) AND NOT (\"User Age\" >= 26.0 AND \"User Age\" <= 52.0) THEN 1 END),\n  AVG(\"User Age\") \nFROM emoji",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 285,
+            "message": "Query 1.dask.emoji.aggregation[0]:\nSELECT \n  COUNT(*),\n  COUNT(CASE WHEN NOT (\"User Age\" IS NULL) AND NOT (\"User Age\" >= 26.0 AND \"User Age\" <= 52.0) THEN 1 END),\n  AVG(\"User Age\") \nFROM emoji",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 4,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "Query 20.dask.emoji.\"User Age\".failed_rows[invalid_count]:\nSELECT * FROM emoji \n WHERE NOT (\"User Age\" IS NULL) AND NOT (\"User Age\" >= 26.0 AND \"User Age\" <= 52.0) \n LIMIT 100",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 286,
+            "message": "Query 4.dask.emoji.\"User Age\".failed_rows[invalid_count]:\nSELECT * FROM emoji \n WHERE NOT (\"User Age\" IS NULL) AND NOT (\"User Age\" >= 26.0 AND \"User Age\" <= 52.0) \n LIMIT 100",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 5,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "Query 20.dask.emoji.\"User Age\".failed_rows[invalid_count]:\nSELECT * FROM emoji \n WHERE NOT (\"User Age\" IS NULL) AND NOT (\"User Age\" >= 26.0 AND \"User Age\" <= 52.0) \n LIMIT 100",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 287,
+            "message": "Query 4.dask.emoji.\"User Age\".failed_rows[invalid_count]:\nSELECT * FROM emoji \n WHERE NOT (\"User Age\" IS NULL) AND NOT (\"User Age\" >= 26.0 AND \"User Age\" <= 52.0) \n LIMIT 100",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 6,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "Using DefaultSampler",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 288,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 7,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "Query 19.dask.emoji.Emoji.duplicate_count:\n\nWITH frequencies AS (\n    SELECT COUNT(*) AS frequency\n    FROM emoji\n    WHERE Emoji IS NOT NULL\n    GROUP BY Emoji)\nSELECT COUNT(*)\nFROM frequencies\nWHERE frequency > 1",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 289,
+            "message": "Query 3.dask.emoji.Emoji.duplicate_count:\n\nWITH frequencies AS (\n    SELECT COUNT(*) AS frequency\n    FROM emoji\n    WHERE Emoji IS NOT NULL\n    GROUP BY Emoji)\nSELECT COUNT(*)\nFROM frequencies\nWHERE frequency > 1",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 8,
             "doc": null,
             "location": null
         },
         {
             "level": "ERROR",
-            "message": "Query execution error in 19.dask.emoji.Emoji.duplicate_count: SchemaError(FieldNotFound { field: Column { relation: None, name: \"emoji\" }, valid_fields: [Column { relation: Some(Bare { table: \"emoji\" }), name: \"Emoji\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Context\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Platform\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Age\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Gender\" }] })\n\nWITH frequencies AS (\n    SELECT COUNT(*) AS frequency\n    FROM emoji\n    WHERE Emoji IS NOT NULL\n    GROUP BY Emoji)\nSELECT COUNT(*)\nFROM frequencies\nWHERE frequency > 1",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 290,
+            "message": "Query execution error in 3.dask.emoji.Emoji.duplicate_count: SchemaError(FieldNotFound { field: Column { relation: None, name: \"emoji\" }, valid_fields: [Column { relation: Some(Bare { table: \"emoji\" }), name: \"Emoji\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Context\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Platform\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Age\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Gender\" }] })\n\nWITH frequencies AS (\n    SELECT COUNT(*) AS frequency\n    FROM emoji\n    WHERE Emoji IS NOT NULL\n    GROUP BY Emoji)\nSELECT COUNT(*)\nFROM frequencies\nWHERE frequency > 1",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 9,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "Query 18.dask.emoji.schema[emoji]:\nselect column, type from showcolumns",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 291,
+            "message": "Query 2.dask.emoji.schema[emoji]:\nselect column, type from showcolumns",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 10,
             "doc": null,
             "location": null
         },
         {
             "level": "ERROR",
             "message": "Metrics 'duplicate_count' were not computed for check 'duplicate_count(Emoji) = 0'",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 292,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 11,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "Scan summary:",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 293,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 12,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
             "message": "3/4 queries OK",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 294,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 13,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "  17.dask.emoji.aggregation[0] [OK] 0:00:00.056177",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 295,
+            "message": "  1.dask.emoji.aggregation[0] [OK] 0:00:00.049553",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 14,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "  20.dask.emoji.\"User Age\".failed_rows[invalid_count] [OK] 0:00:00.043948",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 296,
+            "message": "  4.dask.emoji.\"User Age\".failed_rows[invalid_count] [OK] 0:00:00.041737",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 15,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "  19.dask.emoji.Emoji.duplicate_count [OK] 0:00:00.004389\n\nWITH frequencies AS (\n    SELECT COUNT(*) AS frequency\n    FROM emoji\n    WHERE Emoji IS NOT NULL\n    GROUP BY Emoji)\nSELECT COUNT(*)\nFROM frequencies\nWHERE frequency > 1",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 297,
+            "message": "  3.dask.emoji.Emoji.duplicate_count [OK] 0:00:00.003847\n\nWITH frequencies AS (\n    SELECT COUNT(*) AS frequency\n    FROM emoji\n    WHERE Emoji IS NOT NULL\n    GROUP BY Emoji)\nSELECT COUNT(*)\nFROM frequencies\nWHERE frequency > 1",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 16,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
             "message": "    SchemaError(FieldNotFound { field: Column { relation: None, name: \"emoji\" }, valid_fields: [Column { relation: Some(Bare { table: \"emoji\" }), name: \"Emoji\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Context\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Platform\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Age\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Gender\" }] })",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 298,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 17,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "  18.dask.emoji.schema[emoji] [OK] 0:00:00.006232",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 299,
+            "message": "  2.dask.emoji.schema[emoji] [OK] 0:00:00.005664",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 18,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
             "message": "1/4 queries ERROR",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 300,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 19,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "  17.dask.emoji.aggregation[0] [ERROR] 0:00:00.056177",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 301,
+            "message": "  1.dask.emoji.aggregation[0] [ERROR] 0:00:00.049553",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 20,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "  20.dask.emoji.\"User Age\".failed_rows[invalid_count] [ERROR] 0:00:00.043948",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 302,
+            "message": "  4.dask.emoji.\"User Age\".failed_rows[invalid_count] [ERROR] 0:00:00.041737",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 21,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "  19.dask.emoji.Emoji.duplicate_count [ERROR] 0:00:00.004389\n\nWITH frequencies AS (\n    SELECT COUNT(*) AS frequency\n    FROM emoji\n    WHERE Emoji IS NOT NULL\n    GROUP BY Emoji)\nSELECT COUNT(*)\nFROM frequencies\nWHERE frequency > 1",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 303,
+            "message": "  3.dask.emoji.Emoji.duplicate_count [ERROR] 0:00:00.003847\n\nWITH frequencies AS (\n    SELECT COUNT(*) AS frequency\n    FROM emoji\n    WHERE Emoji IS NOT NULL\n    GROUP BY Emoji)\nSELECT COUNT(*)\nFROM frequencies\nWHERE frequency > 1",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 22,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
             "message": "    SchemaError(FieldNotFound { field: Column { relation: None, name: \"emoji\" }, valid_fields: [Column { relation: Some(Bare { table: \"emoji\" }), name: \"Emoji\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Context\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"Platform\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Age\" }, Column { relation: Some(Bare { table: \"emoji\" }), name: \"User Gender\" }] })",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 304,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 23,
             "doc": null,
             "location": null
         },
         {
             "level": "DEBUG",
-            "message": "  18.dask.emoji.schema[emoji] [ERROR] 0:00:00.006232",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 305,
+            "message": "  2.dask.emoji.schema[emoji] [ERROR] 0:00:00.005664",
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 24,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "2/5 checks PASSED: ",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 306,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 25,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "    emoji in dask",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 307,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 26,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "      row_count > 0 [sodacl_string.yml] [PASSED]",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 308,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 27,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "        check_value: 5000",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 309,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 28,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "      avg(\"User Age\") > 37 [sodacl_string.yml] [PASSED]",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 310,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 29,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "        check_value: 38.8756",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 311,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 30,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "2/5 checks FAILED: ",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 312,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 31,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "    emoji in dask",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 313,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 32,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "      Find forbidden, missing, or wrong type [sodacl_string.yml] [FAILED]",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 314,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 33,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "        fail_column_index_mismatch[User Age] expected(1) actual(3)fail_column_on_expected_index(Context)",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 315,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 34,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "        schema_measured = [Emoji varchar, Context varchar, Platform varchar, User Age bigint, User Gender varchar]",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 316,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 35,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "      invalid_count(\"User Age\") = 0 [sodacl_string.yml] [FAILED]",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 317,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 36,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "        check_value: 2479",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 318,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 37,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "1/5 checks NOT EVALUATED: ",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 319,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 38,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "    emoji in dask",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 320,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 39,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "      duplicate_count(Emoji) = 0 [sodacl_string.yml] [NOT EVALUATED]",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 321,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 40,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "        check_value: None",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 322,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 41,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "1 checks not evaluated.",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 323,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 42,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "2 errors.",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 324,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 43,
             "doc": null,
             "location": null
         },
         {
             "level": "INFO",
             "message": "Oops! 2 errors. 2 failures. 0 warnings. 2 pass.",
-            "timestamp": "2024-08-01T21:12:41+00:00",
-            "index": 325,
+            "timestamp": "2024-08-09T00:01:01+00:00",
+            "index": 44,
             "doc": null,
             "location": null
         }
