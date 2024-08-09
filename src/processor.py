@@ -3,7 +3,6 @@ import os
 import sys
 import logging as log
 import psycopg2
-from psycopg2 import sql
 import redshift_connector
 import pandas as pd
 from dotenv import load_dotenv
@@ -46,6 +45,7 @@ class PostgreSQLProcessor:
                 database=self.database
             )
             self.cursor = self.connection.cursor()
+            log.info("Successfull connection!")
         except psycopg2.Error as e:
             log.error(f"Error connecting to PostgreSQL: {e}")
             sys.exit(1)
@@ -323,8 +323,8 @@ if __name__=="__main__":
             password=os.environ["PASS"],
             database=os.environ["DB"]
             )
-    # processor = PostgreSQLProcessor(**conn_data)
-    processor = RedshiftProcessor(**conn_data)
+    processor = PostgreSQLProcessor(**conn_data)
+    # processor = RedshiftProcessor(**conn_data)
 
     processor.connect()
     data = processor.fetch_data_as_dict("SELECT * FROM adp_dwh.co_sandbox_datos.tmp_test_fabio;")
