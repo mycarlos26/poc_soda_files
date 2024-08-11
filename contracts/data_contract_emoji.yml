@@ -2,7 +2,7 @@
 creador_contrato: "Fabio Salinas"
 fecha_creacion: "2024-08-05"
 fecha_ultima_modificacion: "2024-08-05"
-archivo_de_revision_de_datos: "check_emoji.yml"
+archivo_de_revision_de_datos: "contracts/check_emoji.yml"
 responsable_de_revision_de_datos: "Fabio Salinas"
 responsable_de_entrega_de_datos: "Carlos González"
 email_responsable_de_entrega_de_datos: "carlos.gonzalez@transunion.com"
